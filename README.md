@@ -4,7 +4,7 @@ Bu proje, Selenium tabanlı bir çözümle Google'ın sesli yazma (dictation) ö
 
 ------------------------------------
 
-❤️ Youtube link : 
+❤️ Youtube link : https://www.youtube.com/watch?v=q2vCrR6h_EI&feature=youtu.be
 
 ---
 
