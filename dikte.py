@@ -17,6 +17,7 @@ from pathlib import Path
 import atexit
 import signal
 import tempfile
+from webdriver_manager.chrome import ChromeDriverManager
 
 if getattr(sys, 'frozen', False):
     application_path = os.path.dirname(sys.executable)
@@ -30,7 +31,7 @@ def resource_path(relative_path):
 mic_path = os.path.join(application_path, 'mic.png')
 mic_mute_path = os.path.join(application_path, 'mic_Mute.png')
 loading_path = os.path.join(application_path, 'loading.png')
-main_chromedriver_path = os.path.join(application_path, 'chromedriver.exe')
+
 
 driver = None
 last_text = ""
@@ -48,11 +49,13 @@ def cleanup():
         except Exception:
             pass
 
+
+
 def create_driver_with_user_profile():
     chrome_options = Options()
     user_profile_path = os.path.join(str(Path.home()), "chromeprofile")
     chrome_options.add_argument(f"--user-data-dir={user_profile_path}")
-    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless=new')  # İstersen bunu da ekle
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
     prefs = {
@@ -60,9 +63,11 @@ def create_driver_with_user_profile():
         "profile.default_content_setting_values.notifications": 1,
     }
     chrome_options.add_experimental_option("prefs", prefs)
-    chromedriver_path = resource_path("chromedriver.exe")
-    service = Service(chromedriver_path)
+
+    # Otomatik olarak uyumlu sürümü indirir
+    service = Service(ChromeDriverManager().install())
     return webdriver.Chrome(service=service, options=chrome_options)
+
 
 def monitor_notepad():
     global last_text, monitoring

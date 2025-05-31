@@ -5,7 +5,7 @@ a = Analysis(
     ['dikte.py'],
     pathex=[],
     binaries=[],
-    datas=[('mic.png', '.'), ('mic_Mute.png', '.'), ('loading.png', '.'), ('chromedriver.exe', '.')],
+    datas=[('mic.png', '.'), ('mic_Mute.png', '.'), ('loading.png', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
